@@ -14,4 +14,18 @@ export class EventEmitter {
         const listenerSet = this.#listeners.get(type);
         listenerSet.add(listener);
     }
+    /**
+     * 指定したイベントをディスパッチする
+     * @param {string} type イベント名
+     */
+    emit(type) {
+        // 指定したイベントに対応するSetを取り出し、全てのリスナー関数を呼び出す
+        const listenerSet = this.#listeners.get(type);
+        if (!listenerSet) {
+            return;
+        }
+        listenerSet.forEach(listener => {
+            listener.call(this);
+        });
+    }
 }
