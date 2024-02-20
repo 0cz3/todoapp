@@ -1,3 +1,5 @@
+import { TodoListModel } from "./model/TodoListModel.js";
+import { TodoItemModel } from "./model/TodoItemModel.js";
 import { element, render} from "./view/html-util.js";
 export class App {
     mount() {
@@ -23,6 +25,6 @@ export class App {
             todoItemCountElement.textContent = `Todoアイテム数: ${todoItemCount}`;
              // 入力欄を空文字列にしてリセットする
             inputElement.value = "";
-        })
+        });
     }
 }
