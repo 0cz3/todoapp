@@ -27,9 +27,15 @@ export class App {
             // アイテム数の表示を更新
             todoItemCountElement.textContent = `Todoアイテム数: ${this.#todoListModel.getTotalCount()}`;
         });
+        // 3. フォームを送信したら、新しいTodoItemModelを追加する
         formElement.addEventListener("submit",(event) => {
             // 本来のsubmitイベントの動作を止める
             event.preventDefault();
+            // 新しいTodoItemをTodoListへ追加する
+            this.#todoListModel.addTodo(new TodoItemModel({
+                title: inputElement.value,
+                completed: false
+            }));
              // 入力欄を空文字列にしてリセットする
             inputElement.value = "";
         });
