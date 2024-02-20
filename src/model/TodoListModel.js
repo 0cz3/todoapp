@@ -9,4 +9,12 @@ export class TodoListModel extends EventEmitter {
         super();
         this.#items = items;
     }
+
+    /**
+     * TodoItemの合計個数を返す
+     * @returns {number}
+    */
+    getTotalCount() {
+        return this.#items.length;
+    }
 }
