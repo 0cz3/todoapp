@@ -17,4 +17,12 @@ export class TodoListModel extends EventEmitter {
     getTotalCount() {
         return this.#items.length;
     }
+
+    /**
+     * 表示できるTodoItemの配列を返す
+     * @returns {TodoItemModel[]}
+     */
+    getTodoItems() {
+        return this.#items;
+    }
 }
