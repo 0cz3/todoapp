@@ -25,4 +25,12 @@ export class TodoListModel extends EventEmitter {
     getTodoItems() {
         return this.#items;
     }
+
+    /**
+     * TodoListの状態が更新された時に呼び出されるリスナー関数を登録する
+     * @param {Function} listener
+     */
+    onChange(listener) {
+        this.addEventListener("change",listener);
+    }
 }
