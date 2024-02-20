@@ -33,4 +33,11 @@ export class TodoListModel extends EventEmitter {
     onChange(listener) {
         this.addEventListener("change",listener);
     }
+
+    /**
+     * 状態が変更された時に呼ぶ。登録済みのリスナー関数を呼び出す
+     */
+    emitChanges(){
+        this.emit("change");
+    }
 }
