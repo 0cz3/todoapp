@@ -40,4 +40,13 @@ export class TodoListModel extends EventEmitter {
     emitChanges(){
         this.emit("change");
     }
+
+    /**
+     * TodoItemを追加する
+     * @param {TodoItemModel} todoItem
+     */
+    addTodo(todoItem) {
+        this.#items.push(todoItem);
+        this.emitChanges();
+    }
 }
