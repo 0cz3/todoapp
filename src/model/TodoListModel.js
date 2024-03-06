@@ -63,4 +63,16 @@ export class TodoListModel extends EventEmitter {
         todoItem.completed = completed;
         this.emitChange();
     }
+
+    /**
+     * 指定したidのTodoItemを削除する
+     * ＠param {{ id: number }}
+     */
+    deleteTodo({ id }) {
+        // `id`に一致しないTodoItemだけを残すことで、`id`に一致するTodoItemを削除
+        this.#items = this.#items.filter(todo => {
+            return Todo.id !== id;
+        })
+        this.emitChange();
+    }
 }
