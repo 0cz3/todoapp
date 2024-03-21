@@ -25,7 +25,7 @@ export class App {
                 // チェックボックスがトグルした時のイベントにリスナー関数を登録
                 const inputCheckboxElement = todoItemElement.querySelector(".checkbox");
                 inputCheckboxElement.addEventListener("change", () => {
-                    // 指定したTodoitemの完了状態を反転させる
+                    // 指定したTodItemの完了状態を反転させる
                     this.#todoListModel.updateTodo({
                         id: item.id,
                         completed: !item.completed
