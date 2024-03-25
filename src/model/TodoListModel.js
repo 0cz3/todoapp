@@ -49,4 +49,30 @@ export class TodoListModel extends EventEmitter {
         this.#items.push(todoItem);
         this.emitChanges();
     }
+
+    /**
+     * 指定したidのTodoItemのcomputedを更新する
+     * ＠param {{ id: number, computed: boolean }}
+     */
+    updateTodo({ id, completed}) {
+        // `id`が一致するTodoItemを見つけ、あるなら完了状態の値を更新する
+        const todoItem = this.#items.find(todo => todo.id === id);
+        if(!todoItem) {
+            return;
+        }
+        todoItem.completed = completed;
+        this.emitChanges();
+    }
+
+    /**
+     * 指定したidのTodoItemを削除する
+     * ＠param {{ id: number }}
+     */
+    deleteTodo({ id }) {
+        // `id`に一致しないTodoItemだけを残すことで、`id`に一致するTodoItemを削除
+        this.#items = this.#items.filter(todo => {
+            return todo.id !== id;
+        })
+        this.emitChanges();
+    }
 }
