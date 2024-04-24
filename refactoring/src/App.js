@@ -1,15 +1,21 @@
 import { TodoListModel } from "./model/TodoListModel.js";
 import { TodoItemModel } from "./model/TodoItemModel.js";
 import { element, render} from "./view/html-util.js";
+
 export class App {
     // 1. TodoListModelの初期化
     #todoListModel = new TodoListModel();
-
     mount() {
         const formElement = document.querySelector("#js-form");
         const inputElement = document.querySelector("#js-form-input");
         const containerElement = document.querySelector("#js-todo-list");
         const todoItemCountElement = document.querySelector("#js-todo-count");
+
+        // formElement.addEventListener("submit" , (event) => {
+        //     event.preventDefault();
+        //     addTodo(formElement.value,);
+        // });
+
         // 2. TodoListModelの状態が更新されたら表示を更新する
         this.#todoListModel.onChange(() => {
             // TodoリストをまとめるList要素
