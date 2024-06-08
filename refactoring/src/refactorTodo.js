@@ -13,8 +13,8 @@ export class Todo {
     this.completed = false;
     this.todoItemCountElement = document.querySelector(obj.todoItemCountElement);
     this.containerElement = document.querySelector(obj.containerElement);
-    this.todoListElement = element `<ul></ul>`;
-    this.todoItemElement = element `<li><input type="checkbox" class="checkbox">${obj.title}<button class="delete">x</button></li>`;
+    this.todoListElement = element`<ul></ul>`;
+    this.todoItemElement = element`<li><input type="checkbox" class="checkbox">${obj.title}<button class="delete">x</button></li>`;
     this.items = items.push(this);
   }
   /**
@@ -35,11 +35,11 @@ export class Todo {
   updateTodo() {
     this.todoListElement.innerHTML = "";
     items.forEach((item) => {
-    item.todoItemElement = item.completed
-        ? element `<li><input type="checkbox" class="checkbox" checked><s>${item.title}</s> <button class="delete">x</button></li>`
-        : element `<li><input type="checkbox" class="checkbox">${item.title}<button class="delete">x</button></li>`;
-        this.todoListElement.appendChild(item.todoItemElement);
-      })
+      item.todoItemElement = item.completed
+        ? element`<li><input type="checkbox" class="checkbox" checked><s>${item.title}</s> <button class="delete">x</button></li>`
+        : element`<li><input type="checkbox" class="checkbox">${item.title}<button class="delete">x</button></li>`;
+      this.todoListElement.appendChild(item.todoItemElement);
+    });
     render(this.todoListElement, this.containerElement);
   }
   /**
@@ -54,9 +54,9 @@ export class Todo {
    */
   toggleCompletedTodo(id) {
     console.log();
-    items.forEach(todoItem => {
+    items.forEach((todoItem) => {
       const tarItem = todoItem.idx === id;
-      if(!tarItem) {
+      if (!tarItem) {
         return;
       }
       todoItem.completed = !todoItem.completed;
