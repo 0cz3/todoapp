@@ -1,7 +1,7 @@
 import { element, render } from "./refactorUtil.js";
 
 let idx = 0;
-let todoItems = [];
+let items = [];
 
 export class Todo {
   /**
@@ -14,27 +14,32 @@ export class Todo {
     this.todoItemCountElement = document.querySelector(obj.todoItemCountElement);
     this.containerElement = document.querySelector(obj.containerElement);
     this.todoListElement = element `<ul></ul>`;
-    this.todoItems = [...todoItems, obj];
-    console.log(this.todoItems);
+    this.todoItemElement = element `<li><input type="checkbox" class="checkbox">${obj.title}<button class="delete">x</button></li>`;
+    this.items = items.push(this);
   }
-
+  /**
+   * itemsを返却
+   */
+  getItems() {
+    return items;
+  }
   /**
    * カウンターの値を更新
    */
   updateCount() {
-    this.todoItemCountElement.innerHTML = `Todoアイテム数: ${this.todoItems.length}`;
+    this.todoItemCountElement.innerHTML = `Todoアイテム数: ${this.items.length}`;
   }
   /**
    * todoを更新
    */
   updateTodo() {
     this.todoListElement.innerHTML = "";
-    this.todoItems.forEach((todoItem) => {
-      const todoItemElement = todoItem.completed
-        ? element `<li><input type="checkbox" class="checkbox" checked><s>${todoItem.title}</s> <button class="delete">x</button></li>`
-        : element `<li><input type="checkbox" class="checkbox">${todoItem.title}<button class="delete">x</button></li>`;
-      this.todoListElement.appendChild(todoItemElement);
-    })
+    items.forEach((item) => {
+    item.todoItemElement = item.completed
+        ? element `<li><input type="checkbox" class="checkbox" checked><s>${item.title}</s> <button class="delete">x</button></li>`
+        : element `<li><input type="checkbox" class="checkbox">${item.title}<button class="delete">x</button></li>`;
+        this.todoListElement.appendChild(item.todoItemElement);
+      })
     render(this.todoListElement, this.containerElement);
   }
   /**
@@ -44,11 +49,15 @@ export class Todo {
     this.updateCount();
     this.updateTodo();
   }
+  /**
+   * todoの完了状態を更新
+   */
   toggleCompletedTodo(id) {
-    todoItems.forEach(todoItem => {
+    console.log();
+    items.forEach(todoItem => {
       const tarItem = todoItem.idx === id;
       if(!tarItem) {
-        return
+        return;
       }
       todoItem.completed = !todoItem.completed;
       this.updateTodo();

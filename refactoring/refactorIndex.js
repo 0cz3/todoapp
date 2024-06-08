@@ -17,12 +17,14 @@ formElement.addEventListener("submit" , (event) => {
     newTodo.addTodo();
     inputElement.value = "";
 
-    const checkbox = document.querySelectorAll(".checkbox");
-    checkbox.forEach((checkItem, id) => {
-        checkItem.addEventListener("change", (e) => {
+    const todoItems = newTodo.getItems();
+    todoItems.forEach((todoItem) => {
+        const checkbox = todoItem.todoItemElement.querySelector(".checkbox");
+        checkbox.addEventListener("change", (e) =>{
+            const id = todoItem.idx;
             newTodo.toggleCompletedTodo(id);
             e.stopImmediatePropagation();
-        });
+        })
     });
 });
 
