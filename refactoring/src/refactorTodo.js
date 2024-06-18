@@ -11,25 +11,15 @@ export class Todo {
     this.idx = idx++;
     this.title = obj.title;
     this.completed = false;
-    this.todoItemCountElement = document.querySelector(
-      obj.todoItemCountElement
-    );
+    this.todoItemCountElement = document.querySelector(obj.todoItemCountElement);
     this.containerElement = document.querySelector(obj.containerElement);
     this.todoListElement = element`<ul></ul>`;
-    this.todoItemElement = element`<li><input type="checkbox" class="checkbox">${obj.title}<button class="delete">x</button></li>`;
-    this.items = items.push(this);
-  }
-  /**
-   * itemsを返却
-   */
-  getItems() {
-    return items;
   }
   /**
    * カウンターの値を更新
    */
   updateCount() {
-    this.todoItemCountElement.innerHTML = `Todoアイテム数: ${this.items.length}`;
+    this.todoItemCountElement.innerHTML = `Todoアイテム数: ${items.length}`;
   }
   /**
    * todoを更新
@@ -56,12 +46,13 @@ export class Todo {
       });
     });
     render(this.todoListElement, this.containerElement);
+    this.updateCount();
   }
   /**
    * todoを追加、DOMを変化させてtodo表示
    */
   addTodo() {
-    this.updateCount();
+    this.items = items.push(this);
     this.updateTodo();
   }
   /**
