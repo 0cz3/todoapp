@@ -11,7 +11,9 @@ export class Todo {
     this.idx = idx++;
     this.title = obj.title;
     this.completed = false;
-    this.todoItemCountElement = document.querySelector(obj.todoItemCountElement);
+    this.todoItemCountElement = document.querySelector(
+      obj.todoItemCountElement
+    );
     this.containerElement = document.querySelector(obj.containerElement);
     this.todoListElement = element`<ul></ul>`;
     this.todoItemElement = element`<li><input type="checkbox" class="checkbox">${obj.title}<button class="delete">x</button></li>`;
@@ -38,7 +40,20 @@ export class Todo {
       item.todoItemElement = item.completed
         ? element`<li><input type="checkbox" class="checkbox" checked><s>${item.title}</s> <button class="delete">x</button></li>`
         : element`<li><input type="checkbox" class="checkbox">${item.title}<button class="delete">x</button></li>`;
+
       this.todoListElement.appendChild(item.todoItemElement);
+
+      const checkbox = item.todoItemElement.querySelector(".checkbox");
+      checkbox.addEventListener("change", (e) => {
+        this.toggleCompletedTodo(item.idx);
+        e.stopImmediatePropagation();
+      });
+
+      const deleteButton = item.todoItemElement.querySelector(".delete");
+      deleteButton.addEventListener("click", (e) => {
+        this.deleteTodo(item.idx);
+        e.stopImmediatePropagation();
+      });
     });
     render(this.todoListElement, this.containerElement);
   }
@@ -53,7 +68,6 @@ export class Todo {
    * todoの完了状態を更新
    */
   toggleCompletedTodo(id) {
-    console.log();
     items.forEach((todoItem) => {
       const tarItem = todoItem.idx === id;
       if (!tarItem) {
@@ -62,5 +76,14 @@ export class Todo {
       todoItem.completed = !todoItem.completed;
       this.updateTodo();
     });
+  }
+  /**
+   * todoを削除
+   */
+  deleteTodo(id) {
+    items = items.filter((todoItem) => {
+      return todoItem.idx !== id;
+    })
+    this.updateTodo();
   }
 }
