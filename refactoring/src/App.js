@@ -1,6 +1,6 @@
 import { TodoListModel } from "./model/TodoListModel.js";
 import { TodoItemModel } from "./model/TodoItemModel.js";
-import { element, render} from "./view/html-util.js";
+import { element, render} from "./refactorUtil.js";
 export class App {
     // 1. TodoListModelの初期化
     #todoListModel = new TodoListModel();
